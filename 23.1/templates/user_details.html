@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>User_details</title>
+</head>
+<body>
+    <div class="Profile_name">
+        <h1 >{{u.first_name}} {{u.last_name}}</h1>
+    </div>
+    
+    <p>
+        <img src="{{u.image}}" alt="/static/images/broken_link.jpg" style="width: 300px; height: 300px;"><br>
+        
+        <div style="float: left;">
+            <a href="/user/{{u.id}}/edit"> <button type="submit" class="E_button">EDIT</button></a>
+        </div>
+       
+        
+        <form action="/user/{{u.id}}" method="post">
+            <button type="submit" class="D_button">DELETE</button>
+        </form> <br>
+
+        <a href="/"><button type="submit" class="E_button">HOME</button></a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,20 @@
+.E_button
+{
+    background-color: blue;
+    color: white;
+    width: 150PX;
+}
+
+.D_button
+{
+    background-color: red;
+    color: white;
+    width: 150PX;
+}
+
+.Profile_name
+{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    width: 300px;
+    text-align: center;
+}
