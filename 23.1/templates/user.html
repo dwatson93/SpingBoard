@@ -7,16 +7,23 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <title>Users</title>
 </head>
-<body>
-    <p>
-        <ol>
+<body style="background-color: lightblue; padding-top: 25vh; padding-bottom: 25vh;">
+
+    <div style="padding-left: 45vw;">
+        <p>
+       <section style="font-size: 5vh;">All USERS</section>
+        <ol style="font-size: 3vh;">
             {%for i in u%}
             <a href="/user/{{i.id}}"><li>{{i.first_name}} {{i.last_name}}</li></a>
             {%endfor%}
         </ol>
-    </p><br>
 
-    <button id="create_u" class="E_button">Add User</button>
+        <button id="create_u" class="E_button">Add User</button>
+    </p>
+    </div>
+    
+
+    
 
     <script src="/static/js/myfile.js"></script>
 </body>

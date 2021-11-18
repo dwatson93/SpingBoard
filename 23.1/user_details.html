@@ -26,9 +26,8 @@
        <h1 class="Profile_name">POSTS</h1> <br>
        
        <ol style="font-size: 3vh;">
-           
-           {%for i in u.p%} 
-           <a href="/user/{{u.id}}/post/{{i.id}}"><li>{{i.title}}</li> <br></a>
+           {%for i in range(0, )%} 
+           <a href="/user/{{u.id}}/post/{{i}}"><li>{{p[i]}} {{u.id}}</li> <br></a>
            {%endfor%}
        </ol>
 

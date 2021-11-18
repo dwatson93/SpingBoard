@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 
 app = Flask(__name__)
 
@@ -12,6 +12,9 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
 connect_db(app)
+
+replace = "()[],"
+join= ''
 
 # list all users
 @app.route('/')
@@ -35,6 +38,26 @@ def create_user():
 def edit_user(user_id):
     u = User.query.get_or_404(user_id)
     return render_template("edit_user.html", u=u)
+
+# make a post
+@app.route('/user/<user_id>/post')
+def user_post(user_id):
+    u = User.query.get_or_404(user_id)
+    return render_template("post.html", u=u)
+
+# Post Details
+@app.route('/user/<user_id>/post/<post_id>')
+def post_detail(post_id, user_id):
+    p = Post.query.get_or_404(post_id)
+    u = User.query.get_or_404(user_id)
+    return render_template("post_details.html", p=p, u=u)
+
+# Edit post
+@app.route('/user/<user_id>/post/<post_id>/edit')
+def Edit_Post(post_id, user_id):
+    p = Post.query.get_or_404(post_id)
+    u = User.query.get_or_404(user_id)
+    return render_template("edit_post.html", p=p, u=u)
 
 # post create user
 @app.route('/user/create', methods = ["POST"])
@@ -67,3 +90,40 @@ def Submit_edit(user_id):
     db.session.add(u)
     db.session.commit()
     return redirect(f"/user/{u.id}")
+
+# submit post
+@app.route('/user/<user_id>/post', methods = ["POST"])
+def submit_post(user_id):
+    Post_id = user_id
+    Title = request.form["Title"]
+    Content = request.form["Content"]
+    p = Post(post_id=int(Post_id), title=Title.upper(), content=Content)
+    db.session.add(p)
+    db.session.commit()
+    return redirect(f"/user/{user_id}")
+
+@app.route('/user/<user_id>/post/<post_id>', methods =["POST"])
+def Delete_post(post_id,user_id):
+    u = User.query.get_or_404(user_id)
+    p = Post.query.get_or_404(post_id)
+    p.post_id = None
+    db.session.add(p)
+    db.session.commit()
+    return redirect(f"/user/{u.id}")
+
+# edit post post
+@app.route('/user/<user_id>/post/<post_id>/edit', methods =["POST"])
+def P_Edit_post(post_id,user_id):
+    u = User.query.get_or_404(user_id)
+    p = Post.query.get_or_404(post_id)
+    Post_id = user_id
+    Title = request.form["Title"]
+    Content = request.form["Content"]
+    p.title = Title.upper()
+    p.content = Content
+    db.session.add(p)
+    db.session.commit()
+    return redirect(f"/user/{u.id}/post/{p.id}")
+
+
+
