@@ -8,9 +8,19 @@
     <title>Post_details</title>
 </head>
 <body style="background-color: lightblue;">
-    <div style="width: 25vw; padding-left: 40vw; padding-top: 25vh; text-align: center;">
+    <div style="width: 25vw; padding-left: 35vw; padding-top: 25vh; text-align: center;">
         <h1 style="font-size: 5vh;">{{p.title}}</h1>
          <p style="font-size: 3vh;">{{p.content}}</p> <br>
+        
+               <p style="font-size: 2vh;">
+                TAGS: 
+                {%for i in p.pt %}
+                <button style="font-size: 2vh;">{{i.t.name}}</button>
+                {%endfor%} 
+               </p>
+                   
+                   
+
          <p>Posted by: {{u.first_name}} {{u.last_name}}</p>
          <p>Created @ {{p.time}}</p> <br>
          <a href="/user/{{u.id}}/post/{{p.id}}/edit" style="float: left;"> <button type="submit" class="E_button">EDIT</button></a>
